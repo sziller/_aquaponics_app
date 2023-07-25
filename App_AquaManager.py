@@ -97,15 +97,14 @@ if __name__ == "__main__":
     from kivy.lang import Builder  # to freely pick kivy files
 
     # use presets to
-    display_settings = {0: {'fullscreen': False, 'run': Window.maximize},   # cover screen with titlebar accessible
-                        1: {'fullscreen': True, 'run': Window.maximize},    # Fullscreen mode
-                        2: {'fullscreen': False, 'size': (480, 640)},       # Portrait  Raspberry Display
-                        3: {'fullscreen': False, 'size': (640, 480)},       # Landscape Raspberry Display
-                        4: {'fullscreen': False, 'size': (480, 960)},       # Portrait  Cellphone
-                        5: {'fullscreen': False, 'size': (960, 480)},       # Landscape Cellphone
-                        6: {'fullscreen': False, 'size': (800, 800)},       # Qubic layout
+    display_settings = {0: {'fullscreen': False,    'run': Window.maximize},   # cover screen with titlebar accessible
+                        1: {'fullscreen': True,     'run': Window.maximize},   # Full-screen mode
+                        2: {'fullscreen': False,    'size': (480, 640)},       # Portrait  Raspberry Display
+                        3: {'fullscreen': False,    'size': (640, 480)},       # Landscape Raspberry Display
+                        4: {'fullscreen': False,    'size': (480, 960)},       # Portrait  Cellphone
+                        5: {'fullscreen': False,    'size': (960, 480)},       # Landscape Cellphone
+                        6: {'fullscreen': False,    'size': (800, 800)},       # Qubic layout
                         }
-
     style_code = 4
 
     Window.fullscreen = display_settings[style_code]['fullscreen']
