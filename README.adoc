@@ -11,7 +11,7 @@ accessible when started over the OS.
 necessary stuff in requirements.txt
 
 == Run
-Run in using the shortcut atached
+Run in using the shortcut attached
 
 == Owner
 Sziller
