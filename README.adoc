@@ -1,0 +1,17 @@
+= Aquaponics frontend App
+
+App to remotely monitor and control my aquaponic system.
+
+== Installation
+All installation needs to be done with pip3!
+Any Directory you import data from needs to include an __init__.py file, in order to be
+accessible when started over the OS.
+
+== Packages
+necessary stuff in requirements.txt
+
+== Run
+Run in using the shortcut atached
+
+== Owner
+Sziller
