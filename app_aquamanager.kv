@@ -50,10 +50,12 @@
 AppObjScreenManager:
     id: ThisIsYourROOTWidget
     canvas.before:
+        Color:
+            rgba: 0, 0, 0, 1
         Rectangle:
             pos: self.pos
             size: self.size
-            source: background_image
+            ## source: background_image
     ScreenStatus:
         id: screen_status
     ScreenControl:
@@ -130,10 +132,76 @@ AppObjScreenManager:
         padding: 20
         spacing: 20
         orientation: "vertical"
-        LabelInfo:
-            id: labelinfo
-            size_hint: 1, 0.15
-            text: "Sometext..."
+        BoxLayout:
+            size_hint: 1, 0.1
+            LabelInfoKey:
+                text: "Auto update in: xx secs"
+            ButtonVal:
+                text: "update"
+
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'System operational:'
+            LabelInfoVal:
+                text: 'True'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Last circulation:'
+            LabelInfoVal:
+                text: '11:00'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Last feeding:'
+            LabelInfoVal:
+                text: '09:20'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Last time shades were lowered:'
+            LabelInfoVal:
+                text: '09:05'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Last time shades were raised:'
+            LabelInfoVal:
+                text: '19:30'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Light group 01:'
+            LabelInfoVal:
+                text: 'on'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Light group 02:'
+            LabelInfoVal:
+                text: 'off'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Air circulation:'
+            LabelInfoVal:
+                text: 'on'
+        BoxLayout:
+            size_hint: 1, 0.1
+            orientation: "horizontal"
+            LabelInfoKey:
+                text: 'Ventillation:'
+            LabelInfoVal:
+                text: 'off'
 
 <OpAreaControl@OperationAreaBox>:
     BoxLayout:
@@ -143,10 +211,10 @@ AppObjScreenManager:
         BoxLayout:
             size_hint: 1, 1
             orientation: "horizontal"
-            AsyncImage:
-                id: qr_plot_layout
-                size_hint: 1, 1
-                source: default_image1
+            ## AsyncImage:
+            ##     id: qr_plot_layout
+            ##     size_hint: 1, 1
+            ##     source: default_image1
 
 
 <NavBar@BoxLayout>:
@@ -188,15 +256,26 @@ AppObjScreenManager:
 <LabelInfo@Label>:
     canvas.before:
         Color:
-            rgba: 1, 1, 1, 0.5
+            rgba: 0, 0, 0, 0.5
         Rectangle:
             pos: self.pos
             size: self.size
-    color: 0, 0, 0, 1
+    color: 1, 1, 1, 1
     font_size: fs_subsubtitle
     font_name: fn_subsubtitle
     text_size: self.size
-    halign: 'center'  ## center, right, left
+
+
+<LabelInfoKey@LabelInfo>:
+    padding: (20, 2)
+    size_hint: 0.6, 1
+    halign: 'left'  ## center, right, left
+    valign: 'center'  ## middle, top, bottom
+
+<LabelInfoVal@LabelInfo>:
+    padding: (20, 2)
+    size_hint: 0.4, 1
+    halign: 'right'  ## center, right, left
     valign: 'center'  ## middle, top, bottom
 
 <LabelRibbon@Label>:
@@ -252,6 +331,20 @@ AppObjScreenManager:
     text: "ToggleButton"
     halign: 'center'  ## center, right, left
     valign: 'middle'  ## middle, top, bottom
+
+<ButtonVal@Button>:
+    size_hint: 0.4, 1
+    font_name: fn_button
+    font_size: fs_button
+    background_color: 0.3, 0.4, 0.3, 0.45
+    target: ""
+    text_size: self.size
+    color: (1, 1, 1)
+    padding: (2, 2)
+    text: "ToggleButton"
+    halign: 'center'  ## center, right, left
+    valign: 'middle'  ## middle, top, bottom
+
 
 #   ---------------------------------------------------------------------
 #   - Button:                                                   ENDED   -
