@@ -33,11 +33,13 @@ class OpAreaStatus(OperationAreaBox):
         super(OpAreaStatus, self).__init__(**kwargs)
 
     def on_release_update(self, instance):
-        print("pushed the button")
-        print(App.get_running_app().status_last_update)
         for key, value in App.get_running_app().status_last_update.items():
             lbl_txt = App.get_running_app().status_fillin_code[key]["lbl"]
-            self.ids[lbl_txt].text = str(value)
+            keycode = App.get_running_app().status_fillin_code[key]["assign"]
+            if keycode:
+                self.ids[lbl_txt].text = keycode[value]
+            else:
+                self.ids[lbl_txt].text = value
 
 
 class NavBar(BoxLayout):
