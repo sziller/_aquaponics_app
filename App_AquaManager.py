@@ -23,6 +23,23 @@ class AppObjScreenManager(ScreenManager):
                 'normal': ["button_nav_status"]}
             }
 
+
+class OperationAreaBox(BoxLayout):
+    pass
+
+
+class OpAreaStatus(OperationAreaBox):
+    def __init__(self, **kwargs):
+        super(OpAreaStatus, self).__init__(**kwargs)
+
+    def on_release_update(self, instance):
+        print("pushed the button")
+        print(App.get_running_app().status_last_update)
+        for key, value in App.get_running_app().status_last_update.items():
+            lbl_txt = App.get_running_app().status_fillin_code[key]["lbl"]
+            self.ids[lbl_txt].text = str(value)
+
+
 class NavBar(BoxLayout):
     """=== Class name: NavBar ==========================================================================================
     This Layout can be used across all screens. Class handles complications of not-yet-drawn instances.
@@ -78,6 +95,27 @@ class AppAquaManager(App):
         self.window_content             = window_content
         self.content_size_multiplier    = csm
         self.external_var: list         = []
+
+        self.status_last_update: dict   = {"system_on": True,
+                                           "last_waterstream": "00:00",
+                                           "last_feeding": "00:00",
+                                           "last_shade_raise": "00:00",
+                                           "last_shade_lower": "00:00",
+                                           "lights-01": False,
+                                           "lights-02": False,
+                                           "air_circulation": False,
+                                           "ventillation": False}
+        self.status_fillin_code: dict   = {
+            "system_on":         {"lbl": "labelval_system", "assign": {True: "on", False: "off"}},
+            "last_waterstream":  {"lbl": "labelval_waterstream", "assign": {}},
+            "last_feeding":      {"lbl": "labelval_feeding", "assign": {}},
+            "last_shade_raise":  {"lbl": "labelval_shade_up", "assign": {}},
+            "last_shade_lower":  {"lbl": "labelval_shade_down", "assign": {}},
+            "lights-01":         {"lbl": "labelval_light1", "assign": {True: "on", False: "off"}},
+            "lights-02":         {"lbl": "labelval_light2", "assign": {True: "on", False: "off"}},
+            "air_circulation":   {"lbl": "labelval_circulation", "assign": {True: "on", False: "off"}},
+            "ventillation":      {"lbl": "labelval_ventillation", "assign": {True: "on", False: "off"}}}
+
 
     def change_screen(self, screen_name, screen_direction="left"):
         """=== Method name: change_screen ==============================================================================

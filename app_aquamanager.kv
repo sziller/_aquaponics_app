@@ -138,6 +138,7 @@ AppObjScreenManager:
                 text: "Auto update in: xx secs"
             ButtonVal:
                 text: "update"
+                on_release: root.on_release_update(self)
 
         BoxLayout:
             size_hint: 1, 0.1
@@ -145,63 +146,72 @@ AppObjScreenManager:
             LabelInfoKey:
                 text: 'System operational:'
             LabelInfoVal:
-                text: 'True'
+                id: labelval_system
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
-                text: 'Last circulation:'
+                text: 'Last water circulation:'
             LabelInfoVal:
-                text: '11:00'
+                id: labelval_waterstream
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
                 text: 'Last feeding:'
             LabelInfoVal:
-                text: '09:20'
+                id: labelval_feeding
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
                 text: 'Last time shades were lowered:'
             LabelInfoVal:
-                text: '09:05'
+                id: labelval_shade_down
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
                 text: 'Last time shades were raised:'
             LabelInfoVal:
-                text: '19:30'
+                id: labelval_shade_up
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
                 text: 'Light group 01:'
             LabelInfoVal:
-                text: 'on'
+                id: labelval_light1
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
                 text: 'Light group 02:'
             LabelInfoVal:
-                text: 'off'
+                id: labelval_light2
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
                 text: 'Air circulation:'
             LabelInfoVal:
-                text: 'on'
+                id: labelval_circulation
+                text: 'N/A'
         BoxLayout:
             size_hint: 1, 0.1
             orientation: "horizontal"
             LabelInfoKey:
                 text: 'Ventillation:'
             LabelInfoVal:
-                text: 'off'
+                id: labelval_ventillation
+                text: 'N/A'
 
 <OpAreaControl@OperationAreaBox>:
     BoxLayout:
