@@ -2,6 +2,7 @@ import os
 import sys
 
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -33,6 +34,9 @@ class OpAreaStatus(OperationAreaBox):
         super(OpAreaStatus, self).__init__(**kwargs)
 
     def on_release_update(self, instance):
+        App.get_running_app().update()
+
+    def data_update(self):
         for key, value in App.get_running_app().status_last_update.items():
             lbl_txt = App.get_running_app().status_fillin_code[key]["lbl"]
             keycode = App.get_running_app().status_fillin_code[key]["assign"]
@@ -40,6 +44,7 @@ class OpAreaStatus(OperationAreaBox):
                 self.ids[lbl_txt].text = keycode[value]
             else:
                 self.ids[lbl_txt].text = value
+
 
 
 class NavBar(BoxLayout):
@@ -92,11 +97,14 @@ class AppAquaManager(App):
                  app_icon: str = "./icon.png",
                  csm: float = 1.0):
         super(AppAquaManager, self).__init__()
-        self.title                      = app_title
-        self.icon                       = app_icon
-        self.window_content             = window_content
-        self.content_size_multiplier    = csm
-        self.external_var: list         = []
+        self.title                          = app_title
+        self.icon                           = app_icon
+        self.window_content                 = window_content
+        self.content_size_multiplier        = csm
+        self.external_var: list             = []
+
+        self.t_interval_auto_update: int    = 20
+        self.t_elapsed: int                 = 0
 
         self.status_last_update: dict   = {"system_on": True,
                                            "last_waterstream": "00:00",
@@ -118,7 +126,6 @@ class AppAquaManager(App):
             "air_circulation":   {"lbl": "labelval_circulation", "assign": {True: "on", False: "off"}},
             "ventillation":      {"lbl": "labelval_ventillation", "assign": {True: "on", False: "off"}}}
 
-
     def change_screen(self, screen_name, screen_direction="left"):
         """=== Method name: change_screen ==============================================================================
         Use this screen-changer instead of the built-in method for more customizability and to enable further
@@ -128,6 +135,23 @@ class AppAquaManager(App):
         smng = self.root  # 'root' refers to the only one root instance in your App. Here it is the actual ROOT
         smng.current = screen_name
         smng.transition.direction = screen_direction
+
+    def on_start(self):
+        Clock.schedule_interval(self.clock_min_update, 1)
+
+    def update(self, *args, **kwargs):
+        print("Update")
+        self.t_elapsed = 0
+        self.get_running_app().root.ids['screen_status'].ids['oparea_status'].data_update()
+
+    def clock_min_update(self, *args, **kwargs):
+        displayed = self.t_interval_auto_update - self.t_elapsed
+        if displayed == 0: displayed = self.t_interval_auto_update
+        self.get_running_app().root.ids['screen_status'].ids['oparea_status'].ids['labelkey_update'].text \
+            = "Auto update in: {:>3} secs".format(displayed)
+        if self.t_elapsed == self.t_interval_auto_update:
+            self.update()
+        self.t_elapsed += 1
 
     def build(self):
         return self.window_content

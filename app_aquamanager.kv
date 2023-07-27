@@ -135,7 +135,8 @@ AppObjScreenManager:
         BoxLayout:
             size_hint: 1, 0.1
             LabelInfoKey:
-                text: "Auto update in: xx secs"
+                id: labelkey_update
+                text: "Auto update in: __ secs"
             ButtonVal:
                 text: "update"
                 on_release: root.on_release_update(self)
