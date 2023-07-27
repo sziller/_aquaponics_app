@@ -46,7 +46,6 @@ class OpAreaStatus(OperationAreaBox):
                 self.ids[lbl_txt].text = value
 
 
-
 class NavBar(BoxLayout):
     """=== Class name: NavBar ==========================================================================================
     This Layout can be used across all screens. Class handles complications of not-yet-drawn instances.
@@ -140,9 +139,12 @@ class AppAquaManager(App):
         Clock.schedule_interval(self.clock_min_update, 1)
 
     def update(self, *args, **kwargs):
-        print("Update")
-        self.t_elapsed = 0
+        print("Send request to Server")
+        print("Receive request from Server")
+        print("Process request from Server")
+        print("Rewrite <self.status_last_update> variable")
         self.get_running_app().root.ids['screen_status'].ids['oparea_status'].data_update()
+        self.t_elapsed = 0
 
     def clock_min_update(self, *args, **kwargs):
         displayed = self.t_interval_auto_update - self.t_elapsed
