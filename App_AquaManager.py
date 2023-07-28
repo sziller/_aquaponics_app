@@ -40,6 +40,7 @@ class OpAreaStatus(OperationAreaBox):
 
     def on_release_update(self, instance):
         App.get_running_app().update()
+        App.get_running_app().root.ids['screen_settings'].ids['oparea_settings'].ids['str_2b_conv'].text = str(self.test)
 
     def data_update(self):
         for key, value in App.get_running_app().status_last_update.items():
@@ -49,6 +50,14 @@ class OpAreaStatus(OperationAreaBox):
                 self.ids[lbl_txt].text = keycode[value]
             else:
                 self.ids[lbl_txt].text = value
+
+
+class OpAreaSettings(OperationAreaBox):
+    def __init__(self, **kwargs):
+        super(OpAreaSettings, self).__init__(**kwargs)
+
+    def on_textupdate_textinput(self, inst):
+        print("text_received")
 
 
 class NavBar(BoxLayout):

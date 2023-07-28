@@ -253,9 +253,16 @@ AppObjScreenManager:
         padding: 20
         spacing: 20
         orientation: "vertical"
-        BoxLayout:
-            size_hint: 1, 1
-            orientation: "horizontal"
+        ScrollView:
+            id: scrlv
+            size_hint: 1, 0.7
+            TextInParagraph:
+                height: max(self.minimum_height, scrlv.height)
+                disabled: False
+                size_hint: 1, None
+                id: str_2b_conv
+                text: "miakurvaisten"
+                on_text: root.on_textupdate_textinput(self)
 
 <NavBar@BoxLayout>:
     id: navbar
