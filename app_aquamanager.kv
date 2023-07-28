@@ -60,6 +60,8 @@ AppObjScreenManager:
         id: screen_status
     ScreenControl:
         id: screen_conrol
+    ScreenSettings:
+        id: screen_settings
 
 <AppObjScreenManager@ScreenManager>:
     ## transition: NoTransition()
@@ -78,13 +80,13 @@ AppObjScreenManager:
 <ScreenStatus@Screen>:
     name: "screen_status"
     InScreenWindow:
+        NavBar:
+            id: navbar
+            size_hint: 1, 0.1                   ##  0.1     < 0.20
         TitleLine:
             id: screen_status_titleline
             size_hint: 1, 0.1                   ##  0.1
             display_title: "Status"
-        NavBar:
-            id: navbar
-            size_hint: 1, 0.1                   ##  0.1     < 0.20
         OpAreaStatus:
             size_hint: 1, 0.75                  ##  0.75    < 0.95
             id: oparea_status
@@ -94,16 +96,35 @@ AppObjScreenManager:
             text_ribbon: "by Sziller"
             image_source: phimage_link
 
+<ScreenSettings@Screen>:
+    name: "screen_settings"
+    InScreenWindow:
+        NavBar:
+            id: navbar
+            size_hint: 1, 0.1                   ##  0.1     < 0.20
+        TitleLine:
+            id: screen_settings_titleline
+            size_hint: 1, 0.1                   ##  0.1
+            display_title: "Settings"
+        OpAreaSettings:
+            size_hint: 1, 0.75                  ##  0.75    < 0.95
+            id: oparea_settings
+        Ribbon:
+            id: ribbon_settings
+            size_hint: 1, 0.05                  ##  0.05    < 1
+            text_ribbon: "by Sziller"
+            image_source: phimage_link
+
 <ScreenControl@Screen>:
     name: "screen_control"
     InScreenWindow:
+        NavBar:
+            id: navbar
+            size_hint: 1, 0.1                      ##  0.1      < 0.20
         TitleLine:
             id: screen_control_titleline
             size_hint: 1, 0.1                      ##  0.1
             display_title: "Control"
-        NavBar:
-            id: navbar
-            size_hint: 1, 0.1                      ##  0.1      < 0.20
         OpAreaControl:
             size_hint: 1, 0.75                     ##  0.75     < 0.95
             id: oparea_control
@@ -227,6 +248,14 @@ AppObjScreenManager:
             ##     size_hint: 1, 1
             ##     source: default_image1
 
+<OpAreaSettings@OperationAreaBox>:
+    BoxLayout:
+        padding: 20
+        spacing: 20
+        orientation: "vertical"
+        BoxLayout:
+            size_hint: 1, 1
+            orientation: "horizontal"
 
 <NavBar@BoxLayout>:
     id: navbar
@@ -236,12 +265,19 @@ AppObjScreenManager:
         id: button_nav_status
         target: "screen_status"
         disabled: True
-        text: "switch ot status screen"
+        text: "Status"
+        on_release: root.on_release_navbar(self)
+    ButtonScreenNav:
+        id: button_nav_settings
+        target: "screen_settings"
+        disabled: False
+        text: "Settings"
         on_release: root.on_release_navbar(self)
     ButtonScreenNav:
         id: button_nav_control
         target: "screen_control"
-        text: "switch to control screen"
+        disabled: False
+        text: "Control"
         on_release: root.on_release_navbar(self)
 
 <Ribbon@BoxLayout>:

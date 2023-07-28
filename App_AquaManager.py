@@ -16,12 +16,17 @@ class AppObjScreenManager(ScreenManager):
                 "seq": 0,
                 'inst': 'button_nav_status',
                 'down': ['button_nav_status'],
-                'normal': ["button_nav_control"]},
-            "screen_control":  {
+                'normal': ["button_nav_settings", "button_nav_control"]},
+            "screen_settings": {
                 "seq": 1,
+                'inst': 'button_nav_settings',
+                'down': ['button_nav_settings'],
+                'normal': ["button_nav_status", "button_nav_control"]},
+            "screen_control":  {
+                "seq": 2,
                 'inst': 'button_nav_control',
                 'down': ['button_nav_control'],
-                'normal': ["button_nav_status"]}
+                'normal': ["button_nav_status", "button_nav_settings"]}
             }
 
 
